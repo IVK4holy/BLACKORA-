@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLACKORA — Africa Connected</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --black: #080808;
+    --dark: #111111;
+    --card: #171717;
+    --gold: #d4af37;
+    --gold-light: #f2d675;
+    --text: #ffffff;
+    --muted: #999999;
+    --border: #292929;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--black);
+    color: var(--text);
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 250px;
+    background: #0d0d0d;
+    border-right: 1px solid var(--border);
+    padding: 25px 18px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 5px;
+}
+
+.tagline {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 35px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 7px;
+    color: #ccc;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #1c1c1c;
+    color: var(--gold);
+}
+
+.nav-icon {
+    font-size: 20px;
+    width: 25px;
+}
+
+.profile-mini {
+    position: absolute;
+    bottom: 25px;
+    left: 18px;
+    right: 18px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37, #704f00);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+}
+
+.topbar {
+    height: 70px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+    position: sticky;
+    top: 0;
+    background: rgba(8,8,8,.95);
+    z-index: 10;
+}
+
+.search {
+    background: #171717;
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 11px 18px;
+    width: 330px;
+    color: white;
+    outline: none;
+}
+
+.search:focus {
+    border-color: var(--gold);
+}
+
+.top-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.icon-btn {
+    background: #171717;
+    border: 1px solid var(--border);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* CONTENT */
+
+.content {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px;
+}
+
+.page-title {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.page-subtitle {
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+/* CREATE POST */
+
+.create-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 22px;
+}
+
+.create-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.post-input {
+    flex: 1;
+    background: #222;
+    border: 0;
+    border-radius: 25px;
+    padding: 14px 18px;
+    color: white;
+    outline: none;
+}
+
+.post-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option-btn {
+    border: 0;
+    background: #222;
+    color: #ccc;
+    padding: 9px 14px;
+    border-radius: 20px;
+}
+
+.option-btn:hover {
+    color: var(--gold);
+}
+
+/* POST */
+
+.post {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.post-name {
+    font-weight: bold;
+}
+
+.verified {
+    color: var(--gold);
+}
+
+.post-time {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.post-text {
+    margin: 17px 0;
+    line-height: 1.6;
+    color: #eee;
+}
+
+.post-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 13px;
+    background:
+        radial-gradient(circle at 30% 30%, #d4af37, transparent 20%),
+        radial-gradient(circle at 70% 60%, #5b3a00, transparent 30%),
+        linear-gradient(135deg, #171717, #382900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 13px;
+}
+
+.action-btn {
+    background: transparent;
+    border: 0;
+    color: #aaa;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.action-btn:hover {
+    background: #222;
+    color: white;
+}
+
+.action-btn.liked {
+    color: #ff4d6d;
+}
+
+/* TRENDING */
+
+.trends {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.trend {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.trend small {
+    color: var(--muted);
+}
+
+.trend h3 {
+    margin: 8px 0;
+}
+
+.trend span {
+    color: var(--gold);
+}
+
+/* PROFILE */
+
+.profile-cover {
+    height: 220px;
+    border-radius: 18px 18px 0 0;
+    background:
+        radial-gradient(circle at 20% 50%, #d4af37, transparent 20%),
+        linear-gradient(120deg, #080808, #493600, #111);
+}
+
+.profile-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.profile-info {
+    padding: 0 30px 30px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#f2d675,#704f00);
+    border: 5px solid var(--card);
+    margin-top: -50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.profile-name {
+    font-size: 26px;
+    margin-top: 10px;
+}
+
+.profile-bio {
+    color: #bbb;
+    margin: 10px 0 20px;
+}
+
+.stats {
+    display: flex;
+    gap: 35px;
+}
+
+.stats strong {
+    display: block;
+    font-size: 20px;
+}
+
+.stats span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-box {
+    width: 500px;
+    max-width: 100%;
+    background: #171717;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+}
+
+.modal-textarea {
+    width: 100%;
+    min-height: 150px;
+    background: #222;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    resize: vertical;
+    outline: none;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cancel {
+    background: #292929;
+    color: white;
+    border: 0;
+    padding: 11px 18px;
+    border-radius: 8px;
+}
+
+.publish {
+    background: var(--gold);
+    color: #000;
+    border: 0;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* MOBILE */
+
+.bottom-nav {
+    display: none;
+}
+
+@media(max-width: 800px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding-bottom: 70px;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .search {
+        width: 55%;
+    }
+
+    .content {
+        padding: 20px 14px;
+    }
+
+    .trends {
+        grid-template-columns: 1fr;
+    }
+
+    .post-image {
+        height: 220px;
+    }
+
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background: #111;
+        border-top: 1px solid var(--border);
+        justify-content: space-around;
+        align-items: center;
+        z-index: 50;
+    }
+
+    .bottom-nav button {
+        background: transparent;
+        border: 0;
+        color: #aaa;
+        font-size: 20px;
+    }
+
+    .bottom-nav button.active {
+        color: var(--gold);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">BLACKORA</div>
+    <div class="tagline">AFRICA CONNECTED</div>
+
+    <div class="nav-item active" onclick="showPage('home')">
+        <span class="nav-icon">🏠</span> Home
+    </div>
+
+    <div class="nav-item" onclick="showPage('explore')">
+        <span class="nav-icon">🔎</span> Explore
+    </div>
+
+    <div class="nav-item" onclick="showPage('videos')">
+        <span class="nav-icon">🎬</span> Videos
+    </div>
+
+    <div class="nav-item" onclick="showPage('messages')">
+        <span class="nav-icon">💬</span> Messages
+    </div>
+
+    <div class="nav-item" onclick="showPage('notifications')">
+        <span class="nav-icon">🔔</span> Notifications
+    </div>
+
+    <div class="nav-item" onclick="showPage('profile')">
+        <span class="nav-icon">👤</span> Profile
+    </div>
+
+    <div class="nav-item" onclick="showPage('settings')">
+        <span class="nav-icon">⚙️</span> Settings
+    </div>
+
+    <div class="profile-mini">
+        <div class="avatar">KA</div>
+        <div>
+            <strong>Kofi Asante</strong>
+            <div style="color:#888;font-size:12px">@ivk</div>
+        </div>
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <input
+        class="search"
+        id="searchInput"
+        placeholder="Search BLACKORA..."
+        onkeyup="searchPosts()"
+    >
+
+    <div class="top-actions">
+        <button class="icon-btn" onclick="showPage('notifications')">🔔</button>
+        <button class="icon-btn" onclick="openModal()">＋</button>
+    </div>
+
+</header>
+
+
+<div class="content">
+
+<!-- HOME -->
+
+<section id="home" class="page">
+
+    <h1 class="page-title">Welcome to BLACKORA</h1>
+    <p class="page-subtitle">
+        Africa's next generation social network.
+    </p>
+
+    <div class="create-box">
+
+        <div class="create-row">
+
+            <div class="avatar">KA</div>
+
+            <input
+                class="post-input"
+                placeholder="What's happening, Kofi?"
+                onclick="openModal()"
+            >
+
+        </div>
+
+        <div class="post-options">
+            <button class="option-btn" onclick="openModal()">📷 Photo</button>
+            <button class="option-btn" onclick="openModal()">🎥 Video</button>
+            <button class="option-btn" onclick="openModal()">😊 Feeling</button>
+        </div>
+
+    </div>
+
+
+    <div id="feed">
+
+        <article class="post">
+
+            <div class="post-header">
+                <div class="avatar">KA</div>
+
+                <div>
+                    <div class="post-name">
+                        Kofi Asante <span class="verified">✓</span>
+                    </div>
+                    <div class="post-time">Founder of BLACKORA · 1h</div>
+                </div>
+            </div>
+
+            <p class="post-text">
+                Welcome to BLACKORA — a new digital home where African
+                voices, creativity, culture and ideas can connect with
+                the world. 🌍🖤
+            </p>
+
+            <div class="post-image">🌍</div>
+
+            <div class="post-actions">
+
+                <button class="action-btn" onclick="likePost(this)">
+                    ❤️ <span>124</span>
+                </button>
+
+                <button class="action-btn" onclick="commentPost()">
+                    💬 32
+                </button>
+
+                <button class="action-btn" onclick="sharePost()">
+                    🔄 18
+                </button>
+
+                <button class="action-btn">
+                    🔖
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="post">
+
+            <div class="post-header">
+
+                <div class="avatar">AM</div>
+
+                <div>
+                    <div class="post-name">
+                        Ama Mensah <span class="verified">✓</span>
+                    </div>
+                    <div class="post-time">Accra, Ghana · 3h</div>
+                </div>
+
+            </div>
+
+            <p class="post-text">
+                African creativity is bigger than borders.
+                Let's build, create and support one another. 🇬🇭🔥
+            </p>
+
+            <div class="post-actions">
+
+                <button class="action-btn" onclick="likePost(this)">
+                    ❤️ <span>87</span>
+                </button>
+
+                <button class="action-btn" onclick="commentPost()">
+                    💬 14
+                </button>
+
+                <button class="action-btn" onclick="sharePost()">
+                    🔄 9
+                </button>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- EXPLORE -->
+
+<section id="explore" class="page" style="display:none">
+
+    <h1 class="page-title">Explore</h1>
+    <p class="page-subtitle">Discover what's happening across Africa.</p>
+
+    <div class="trends">
+
+        <div class="trend">
+            <small>Trending</small>
+            <h3>#BLACKORA</h3>
+            <span>25.4K posts</span>
+        </div>
+
+        <div class="trend">
+            <small>Trending in Ghana</small>
+            <h3>#GhanaMusic</h3>
+            <span>18.2K posts</span>
+        </div>
+
+        <div class="trend">
+            <small>Trending in Nigeria</small>
+            <h3>#Afrobeats</h3>
+            <span>44.8K posts</span>
+        </div>
+
+        <div class="trend">
+            <small>Trending in Kenya</small>
+            <h3>#AfricanTech</h3>
+            <span>12.7K posts</span>
+        </div>
+
+        <div class="trend">
+            <small>Culture</small>
+            <h3>#AfricanCulture</h3>
+            <span>31.5K posts</span>
+        </div>
+
+        <div class="trend">
+            <small>Business</small>
+            <h3>#MadeInAfrica</h3>
+            <span>9.8K posts</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- VIDEOS -->
+
+<section id="videos" class="page" style="display:none">
+
+    <h1 class="page-title">BLACKORA Videos</h1>
+    <p class="page-subtitle">Short videos from across Africa.</p>
+
+    <article class="post">
+
+        <div class="post-image">
+            ▶️
+        </div>
+
+        <h2>Africa Rising</h2>
+
+        <p class="post-text">
+            Creativity. Music. Business. Culture.
+            The next chapter belongs to Africa.
+        </p>
+
+        <div class="post-actions">
+            <button class="action-btn" onclick="likePost(this)">
+                ❤️ 2.4K
+            </button>
+
+            <button class="action-btn">
+                💬 184
+            </button>
+
+            <button class="action-btn">
+                🔄 320
+            </button>
+        </div>
+
+    </article>
+
+</section>
+
+
+<!-- MESSAGES -->
+
+<section id="messages" class="page" style="display:none">
+
+    <h1 class="page-title">Messages</h1>
+    <p class="page-subtitle">Connect privately with people on BLACKORA.</p>
+
+    <div class="post">
+
+        <div class="post-header">
+            <div class="avatar">KM</div>
+            <div>
+                <strong>Kwame Mensah</strong>
+                <div class="post-time">Let's build something amazing.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="post">
+
+        <div class="post-header">
+            <div class="avatar">AA</div>
+            <div>
+                <strong>Aisha Ali</strong>
+                <div class="post-time">Are you coming to the event?</div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="page" style="display:none">
+
+    <h1 class="page-title">Notifications</h1>
+
+    <div class="post">
+        ❤️ <strong>Kwame Mensah</strong> liked your post.
+        <div class="post-time">5 minutes ago</div>
+    </div>
+
+    <div class="post">
+        👤 <strong>Ama Mensah</strong> followed you.
+        <div class="post-time">20 minutes ago</div>
+    </div>
+
+    <div class="post">
+        💬 <strong>Kofi Boateng</strong> commented on your post.
+        <div class="post-time">1 hour ago</div>
+    </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page" style="display:none">
+
+    <div class="profile-card">
+
+        <div class="profile-cover"></div>
+
+        <div class="profile-info">
+
+            <div class="profile-avatar">KA</div>
+
+            <h1 class="profile-name">
+                Kofi Asante <span class="verified">✓</span>
+            </h1>
+
+            <div style="color:#888">@ivk</div>
+
+            <p class="profile-bio">
+                Founder of BLACKORA. 🎤 Artist • Creator • Entrepreneur
+                <br>
+                Building an African-owned digital community.
+            </p>
+
+            <div class="stats">
+
+                <div>
+                    <strong>1.2K</strong>
+                    <span>Posts</span>
+                </div>
+
+                <div>
+                    <strong>18.5K</strong>
+                    <span>Followers</span>
+                </div>
+
+                <div>
+                    <strong>620</strong>
+                    <span>Following</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page" style="display:none">
+
+    <h1 class="page-title">Settings</h1>
+    <p class="page-subtitle">Manage your BLACKORA account.</p>
+
+    <div class="post">
+
+        <h3>Account</h3>
+        <br>
+
+        <p style="color:#aaa">
+            Profile information
+        </p>
+
+        <br>
+
+        <p style="color:#aaa">
+            Privacy
+        </p>
+
+        <br>
+
+        <p style="color:#aaa">
+            Security
+        </p>
+
+        <br>
+
+        <p style="color:#aaa">
+            Notifications
+        </p>
+
+    </div>
+
+</section>
+
+</div>
+
+</main>
+
+</div>
+
+
+<!-- MOBILE NAV -->
+
+<nav class="bottom-nav">
+
+    <button onclick="showPage('home')" class="active">🏠</button>
+    <button onclick="showPage('explore')">🔎</button>
+    <button onclick="openModal()">➕</button>
+    <button onclick="showPage('videos')">🎬</button>
+    <button onclick="showPage('profile')">👤</button>
+
+</nav>
+
+
+<!-- CREATE POST MODAL -->
+
+<div class="modal" id="postModal">
+
+    <div class="modal-box">
+
+        <h2>Create a post</h2>
+
+        <textarea
+            id="newPostText"
+            class="modal-textarea"
+            placeholder="What's happening?"
+        ></textarea>
+
+        <div class="modal-buttons">
+
+            <button class="cancel" onclick="closeModal()">
+                Cancel
+            </button>
+
+            <button class="publish" onclick="publishPost()">
+                Publish
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* PAGE NAVIGATION */
+
+function showPage(page) {
+
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(item) {
+        item.style.display = "none";
+    });
+
+    document.getElementById(page).style.display = "block";
+
+    document.querySelectorAll(".nav-item").forEach(function(item) {
+        item.classList.remove("active");
+    });
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* CREATE POST */
+
+function openModal() {
+
+    document.getElementById("postModal").style.display = "flex";
+
+    document.getElementById("newPostText").focus();
+}
+
+
+function closeModal() {
+
+    document.getElementById("postModal").style.display = "none";
+
+}
+
+
+/* PUBLISH */
+
+function publishPost() {
+
+    const text = document.getElementById("newPostText").value.trim();
+
+    if (!text) {
+
+        alert("Write something first.");
+
+        return;
+    }
+
+    const post = document.createElement("article");
+
+    post.className = "post";
+
+    post.innerHTML = `
+
+        <div class="post-header">
+
+            <div class="avatar">KA</div>
+
+            <div>
+
+                <div class="post-name">
+                    Kofi Asante <span class="verified">✓</span>
+                </div>
+
+                <div class="post-time">
+                    Just now
+                </div>
+
+            </div>
+
+        </div>
+
+        <p class="post-text">${escapeHTML(text)}</p>
+
+        <div class="post-actions">
+
+            <button class="action-btn"
+                onclick="likePost(this)">
+                ❤️ <span>0</span>
+            </button>
+
+            <button class="action-btn"
+                onclick="commentPost()">
+                💬 0
+            </button>
+
+            <button class="action-btn"
+                onclick="sharePost()">
+                🔄 0
+            </button>
+
+        </div>
+    `;
+
+    document.getElementById("feed").prepend(post);
+
+    document.getElementById("newPostText").value = "";
+
+    closeModal();
+
+}
+
+
+/* LIKE */
+
+function likePost(button) {
+
+    const span = button.querySelector("span");
+
+    if (!span) {
+
+        button.classList.toggle("liked");
+
+        return;
+    }
+
+    let count = parseInt(span.textContent);
+
+    if (button.classList.contains("liked")) {
+
+        count--;
+
+        button.classList.remove("liked");
+
+    } else {
+
+        count++;
+
+        button.classList.add("liked");
+
+    }
+
+    span.textContent = count;
+
+}
+
+
+/* COMMENT */
+
+function commentPost() {
+
+    const comment = prompt("Write your comment:");
+
+    if (comment && comment.trim()) {
+
+        alert("Comment added: " + comment);
+
+    }
+
+}
+
+
+/* SHARE */
+
+function sharePost() {
+
+    alert("Post shared on BLACKORA!");
+
+}
+
+
+/* SEARCH */
+
+function searchPosts() {
+
+    const query =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const posts =
+        document.querySelectorAll("#feed .post");
+
+    posts.forEach(function(post) {
+
+        const text =
+            post.innerText.toLowerCase();
+
+        if (text.includes(query)) {
+
+            post.style.display = "block";
+
+        } else {
+
+            post.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+document.getElementById("postModal")
+.addEventListener("click", function(event) {
+
+    if (event.target === this) {
+
+        closeModal();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
